@@ -19,17 +19,26 @@ function getBikesWithin(event) {
   promise.then(function (response) {
     console.log(response);
     let displayDiv = document.getElementById("display-bikes");
+    displayDiv.innerText = null;
     for (let i = 0; i < response.bikes.length; i++) {
       let h3 = document.createElement("h3");
       let ul = document.createElement("ul");
-      let li = document.createElement("li");
+      let stolenFrom = document.createElement("li");
+      let stolenDate = document.createElement("li");
       h3.innerText = "Make/Model: " + response.bikes[i].title + " " + "Frame Color(s): " + response.bikes[i].frame_colors;
       if (response.bikes[i].stolen_location) {
-        li.append("Stolen From: " + response.bikes[i].stolen_location);
+        stolenFrom.append("Stolen From: " + response.bikes[i].stolen_location);
       } else {
-        li.append("Stolen From: Unknown Location");
+        stolenFrom.append("Stolen From: Unknown Location");
       }
-      ul.append(li);
+      if (response.bikes[i].date_stolen) {
+        let realDate = new Date(response.bikes[i].date_stolen * 1000).toLocaleDateString("en-US");
+        stolenDate.append("Date Stolen: " + realDate);
+      } else {
+        stolenDate.append("Unknown date");
+      }
+      ul.append(stolenFrom);
+      ul.append(stolenDate);
       displayDiv.append(h3);
       displayDiv.append(ul);
     }
