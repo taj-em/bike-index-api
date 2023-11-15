@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bike Index API</title>
 </head>
+
 <body>
   <h1>Bike Index API</h1>
-  <button id="display-btn">Display Bikes</button>
-  <p id="display-bike-manufacturer"></p>
+  <form id="userInput-form">
+    <input id="userInput" type="text" placeholder="City, State(XX), Country">
+    <button type="submit" id="display-btn">Display Bikes</button>
+  </form>
+  <div id="display-bikes">
+  </div>
+  <div id="display-error">
+  </div>
 </body>
+
 </html>
