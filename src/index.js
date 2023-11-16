@@ -25,6 +25,7 @@ function getBikesWithin(event) {
       let ul = document.createElement("ul");
       let stolenFrom = document.createElement("li");
       let stolenDate = document.createElement("li");
+      let img = document.createElement("img");
       h3.innerText = "Make/Model: " + response.bikes[i].title + " " + "Frame Color(s): " + response.bikes[i].frame_colors;
       if (response.bikes[i].stolen_location) {
         stolenFrom.append("Stolen From: " + response.bikes[i].stolen_location);
@@ -35,12 +36,17 @@ function getBikesWithin(event) {
         let realDate = new Date(response.bikes[i].date_stolen * 1000).toLocaleDateString("en-US");
         stolenDate.append("Date Stolen: " + realDate);
       } else {
-        stolenDate.append("Unknown date");
+        stolenDate.append("Date Stolen: Unknown Date");
+      }
+      if (response.bikes[i].large_img) {
+        img.src = response.bikes[i].large_img;
+        img.height = 200;
       }
       ul.append(stolenFrom);
       ul.append(stolenDate);
       displayDiv.append(h3);
       displayDiv.append(ul);
+      displayDiv.appendChild(img);
     }
   }, function (errorMessage) {
     let errorDiv = document.getElementById("display-error");
